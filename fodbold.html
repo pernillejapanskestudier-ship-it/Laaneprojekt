@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Fodbold – L.O.B</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --green: #12412a;
+        --bg: #f0e8e0;
+        --text: #222827;
+        --footer-bg: #212625;
+        --white: #ffffff;
+        --container: 1100px;
+        --radius: 12px;
+      }
+
+      /* Base */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Open Sans", sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(6px);
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .logo img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+      }
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+      .menu a,
+      summary {
+        color: #e9eeec;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        list-style: none;
+      }
+      .menu a:hover,
+      details[open] summary {
+        color: var(--white);
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      details {
+        position: relative;
+      }
+      .dropdown-content {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background: rgba(20, 20, 20, 0.95);
+        border-radius: 8px;
+        min-width: 160px;
+        padding: 8px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .dropdown-content a {
+        display: block;
+        padding: 10px 15px;
+        color: #e9eeec;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+      .cta {
+        background: var(--green);
+        color: var(--white);
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .cta:hover {
+        filter: brightness(0.95);
+      }
+      @media (max-width: 700px) {
+        nav {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
+
+      main {
+        padding-top: 80px;
+        padding-bottom: 100px;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        height: 340px;
+        display: grid;
+        place-items: center;
+        color: var(--white);
+        text-align: center;
+      }
+      .hero__bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.45)
+          ),
+          var(--hero) top center/cover no-repeat;
+        filter: saturate(0.95);
+      }
+      .hero__inner {
+        position: relative;
+        max-width: 720px;
+        padding: 0 16px;
+      }
+      .hero__overline {
+        margin: 0 0 2px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .hero__title {
+        margin: 0.25rem 0 0.5rem;
+        font-family: "Arvo", serif;
+        font-weight: 700;
+        font-size: clamp(34px, 6vw, 55px);
+        line-height: 1.2;
+      }
+      .hero__lead {
+        margin: 0 auto 14px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 10px;
+        background: var(--green);
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .cta:hover,
+      .btn:hover {
+        background: #0f3120;
+        color: var(--white);
+        transition: background 0.3s ease;
+      }
+
+      /* Layout */
+      .container {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .section {
+        padding: 36px 0;
+      }
+      .split {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .split__text {
+        flex: 1 1 360px;
+      }
+      .split__media {
+        flex: 1 1 360px;
+      }
+      .split__media img {
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+      h2 {
+        font-family: "Arvo", serif;
+        font-weight: 700;
+        font-size: 34px;
+        margin: 0 0 8px;
+        line-height: 1.25;
+        color: var(--text);
+      }
+      ul {
+        margin: 0 0 14px 1.2rem;
+      }
+      ul li {
+        margin: 4px 0;
+      }
+
+      /* Kontakt */
+      .kontakt h2 {
+        text-align: center;
+        margin: 0 0 18px;
+      }
+      .contact {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .contact__card {
+        background: var(--green);
+        color: var(--white);
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 13px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--footer-bg);
+        color: #e9eeec;
+        padding: 60px 20px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+      }
+      footer h2 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      footer li + li {
+        margin-top: 10px;
+      }
+      footer a {
+        color: #cfd6d4;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+      .divider {
+        height: 1px;
+        background-color: #2f3433;
+        margin: 40px 0;
+      }
+      .bottom {
+        text-align: center;
+        color: #c3c9c7;
+        font-size: 13px;
+      }
+      .social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #2a2f2e;
+        margin-top: 10px;
+      }
+      .social a span {
+        font-weight: 600;
+        font-size: 20px;
+        color: #e9eeec;
+      }
+      .social a:hover {
+        background: #3a423f;
+      }
+
+      /* Footeren har overskrifter, som er mørke grundet CSS. Denne kode gør, at overskrifterne i footeren bliver hvide */
+      footer h2 {
+        color: #e9eeec; /* samme farve som resten af teksten i footeren */
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+      }
+
+      @media (min-width: 900px) {
+        .hero {
+          height: 420px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="Billeder/Logo.webp" alt="L.O.B logo" />
+        </a>
+        <div class="menu">
+          <a href="omlob.html">Om L.O.B</a>
+          <details>
+            <summary>Aktiviteter ▾</summary>
+            <div class="dropdown-content">
+              <a href="fodbold.html">Fodbold</a>
+              <a href="fodbold.html">Badminton</a>
+              <a href="fodbold.html">Volley</a>
+              <a href="fodbold.html">Løb</a>
+              <a href="fodbold.html">Motion</a>
+            </div>
+          </details>
+          <a href="medlemskab.html">Medlemskab</a>
+          <a href="arrangementer.html">Arrangementer</a>
+          <a href="medlemskab.html" class="cta">Bliv medlem</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div
+        class="hero__bg"
+        style="--hero: url('Billeder/hero-fodbold.svg')"
+      ></div>
+      <div class="hero__inner">
+        <h1 class="hero__title">FODBOLD</h1>
+        <p class="hero__lead">
+          Fodbold har altid været en central del af Lind Old Boys. Både for dem,
+          der elsker spillet, og for dem, der kommer for fællesskabet omkring
+          det. Vi spiller for motionens, sammenholdets og hyggen skyld – ikke
+          for resultaterne.
+        </p>
+        <a href="medlemskab.html" class="btn">Bliv medlem</a>
+      </div>
+    </div>
+
+    <main>
+      <!-- Udendørs fodbold -->
+      <section class="section">
+        <div class="container split">
+          <article class="split__text">
+            <h2>Udendørs fodbold</h2>
+            <p>Til turneringen har vi to aktive hold tilmeldt:</p>
+            <ul>
+              <li>Old Boys 30+ disp. 11-mands</li>
+              <li>Old Boys 40+ disp. 11-mands</li>
+            </ul>
+            <p>
+              Hjemmekampene spilles på banerne ved ALPI Hallerne, og omklædning
+              foregår i kælderen under Hal 2.
+            </p>
+            <p>
+              Efter kampene er det en tradition, at vi mødes i vores hyggelige
+              klublokale LOBbyen, hvor vi fejrer sejren (uanset hvilket hold der
+              vandt ;-)). Ved spørgsmål eller lign. kan du kontakte vores
+              holdledere. Se kontaktinfo nederst på siden.
+            </p>
+          </article>
+          <figure class="split__media">
+            <img src="Billeder/Fodbold-ud.webp" alt="Udendørs fodbold" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- Indendørs fodbold -->
+      <section class="section">
+        <div class="container split">
+          <figure class="split__media">
+            <img src="Billeder/Fodbold-ind.webp" alt="Indendørs fodbold" />
+          </figure>
+          <article class="split__text">
+            <h2>Indendørs fodbold</h2>
+            <p>
+              Når vinteren nærmer sig, rykker vi indenfor. Det betyder at vi fra
+              uge 43 (31. oktober) træner hver tirsdag aften fra kl. 20.00 –
+              23.00 i ALPI Hallerne (Hal 2).
+            </p>
+            <p>
+              Indendørs fodbold er for alle, der har lyst til at holde bolden i
+              gang i vinterhalvåret – uanset niveau.
+            </p>
+            <p>
+              Hvis du har lyst til at være med, kan du kontakte: Sjakbajs Allan
+              Thomsen.
+            </p>
+            <p>
+              Du er også velkommen til blot at møde op i hallen en tirsdag aften
+              kl. 20.00.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Kontakt -->
+      <section class="section kontakt">
+        <div class="container">
+          <h2>KONTAKT</h2>
+          <div class="contact">
+            <div class="contact__card">
+              <p><strong>Old Boys 30+</strong></p>
+              <p>Dogan Celine</p>
+              <p>Tlf.: 2267 0508</p>
+              <p>Mail: doggi88_4@hotmail.com</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Old Boys 40+</strong></p>
+              <p>Morten Frandsen</p>
+              <p>Tlf.: 2680 8046</p>
+              <p>Mail: napshy@gmail.com</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Indendørs fodbold</strong></p>
+              <p>Allan Thomsen</p>
+              <p>Tlf.: 4174 1679</p>
+              <p>Mail: anh@lob.dk</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <section>
+          <h2>Kontakt</h2>
+          <p>Lind Old Boys</p>
+          <p>Email: <a href="mailto:info@lob.dk">info@lob.dk</a></p>
+          <p>Telefon: <a href="tel:+4512345678">+45 12 34 56 78</a></p>
+        </section>
+
+        <section>
+          <h2>Privatlivspolitik</h2>
+          <ul>
+            <li><a href="/privatlivspolitik">Privatlivspolitik</a></li>
+            <li><a href="/cookie-politik">Cookie Politik</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Links</h2>
+          <ul>
+            <li><a href="/om">Om L.O.B</a></li>
+            <li><a href="/kontakt">Kontakt Os</a></li>
+            <li><a href="/bliv-medlem">Bliv Medlem</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Andet</h2>
+          <ul>
+            <li><a href="/vedtaegter">Vedtægter</a></li>
+            <li><a href="/generalforsamling">Generalforsamling</a></li>
+          </ul>
+          <div class="social">
+            <a href="https://www.facebook.com/lindoldboys" target="_blank">
+              <span>f</span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="bottom">
+        © 2025 L.O.B Sportsklub. Alle rettigheder forbeholdes.
+      </div>
+    </footer>
+  </body>
+</html>

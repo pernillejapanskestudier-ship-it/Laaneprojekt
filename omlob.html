@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Om L.O.B – Lind Old Boys</title>
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Open+Sans:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Ikoner (Font Awesome) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --green: #12412a;
+        --bg: #f0e8e0;
+        --text: #222827;
+        --footer-bg: #212625;
+        --white: #ffffff;
+        --container: 1100px;
+        --radius: 12px;
+      }
+
+      /* Base */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto,
+          Arial, sans-serif;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+        border-radius: 10px;
+      }
+
+      /* Header / menu */
+      header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(6px);
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 20px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .logo img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+      }
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+      .menu a,
+      summary {
+        color: #e9eeec;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        cursor: pointer;
+        list-style: none;
+      }
+      .menu a:hover,
+      details[open] summary {
+        color: var(--white);
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      details {
+        position: relative;
+      }
+      .dropdown-content {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        background: rgba(20, 20, 20, 0.95);
+        border-radius: 8px;
+        min-width: 160px;
+        padding: 8px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .dropdown-content a {
+        display: block;
+        padding: 10px 15px;
+        color: #e9eeec;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
+      .cta {
+        background: var(--green);
+        color: var(--white);
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .cta:hover,
+      .btn:hover {
+        background: #0f3120;
+        color: var(--white);
+        transition: background 0.3s ease;
+      }
+      @media (max-width: 700px) {
+        nav {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+      }
+
+      main {
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        height: 340px;
+        display: grid;
+        place-items: center;
+        color: var(--white);
+        text-align: center;
+      }
+      .hero__bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.45)
+          ),
+          var(--hero) top center/cover no-repeat;
+        filter: saturate(0.95);
+      }
+      .hero__inner {
+        position: relative;
+        max-width: 720px;
+        padding: 0 16px;
+      }
+      .hero__overline {
+        margin: 0 0 2px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .hero__title {
+        margin: 0.25rem 0 0.5rem;
+        font-family: "Arvo", serif;
+        font-weight: 700;
+        font-size: clamp(34px, 6vw, 55px);
+        line-height: 1.2;
+      }
+      .hero__lead {
+        margin: 0 auto;
+      }
+      .hero__lead + .hero__lead {
+        margin-top: 10px;
+      }
+
+      /* Layout helpers */
+      .container {
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      .section {
+        padding: 36px 0;
+      }
+      /* Default: top-justerede kolonner */
+      .split {
+        display: flex;
+        gap: 28px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .split--reverse {
+        flex-direction: row-reverse;
+      }
+      .split__text {
+        flex: 1 1 360px;
+      }
+      .split__media {
+        flex: 1 1 360px;
+      }
+      /* Kun hvor vi ønsker vertikal centrering */
+      .split--center {
+        align-items: center;
+      }
+
+      h2 {
+        font-family: "Arvo", serif;
+        font-weight: 700;
+        font-size: 34px;
+        margin: 0 0 8px;
+        line-height: 1.25;
+        color: var(--text);
+      }
+
+      /* Værdier (ryddet for “bokse”) */
+      .values {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 25px;
+      }
+      .value {
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        text-align: center;
+        max-width: 220px;
+      }
+      .value i {
+        display: inline-grid;
+        place-items: center;
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        background: none;
+        margin-bottom: 10px;
+        font-size: 42px;
+        color: var(--green);
+      }
+      .value h3 {
+        margin: 0 0 6px;
+        font-size: 16px;
+        font-weight: 800;
+        color: #222;
+      }
+
+      /* (Gamle) Bestyrelses-kort – skal vi ikke bruge */
+      .cards {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+        align-items: stretch;
+      }
+      @media (min-width: 700px) {
+        .cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1024px) {
+        .cards {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .card {
+        background: var(--green);
+        color: #fff;
+        border-radius: 10px;
+        padding: 12px 14px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 96px;
+      }
+      .card strong {
+        display: block;
+      }
+
+      /* NY: Kontakt/Bestyrelses-kort i samme stil som KONTAKT-side */
+      .contact {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      .contact__card {
+        background: var(--green);
+        color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Knap */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 10px;
+        background: var(--green);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--footer-bg);
+        color: #e9eeec;
+        padding: 60px 20px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 30px;
+      }
+      footer h2 {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+        font-weight: 600;
+        color: #e9eeec;
+      }
+      footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      footer li + li {
+        margin-top: 10px;
+      }
+      footer a {
+        color: #cfd6d4;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      footer a:hover {
+        color: #fff;
+      }
+      .divider {
+        height: 1px;
+        background: #2f3433;
+        margin: 40px 0;
+      }
+      .bottom {
+        text-align: center;
+        color: #c3c9c7;
+        font-size: 13px;
+      }
+      .social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #2a2f2e;
+        margin-top: 10px;
+      }
+      .social a span {
+        font-weight: 600;
+        font-size: 20px;
+        color: #e9eeec;
+      }
+      .social a:hover {
+        background: #3a423f;
+      }
+
+      @media (min-width: 900px) {
+        .hero {
+          height: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <nav>
+        <a href="Index.html" class="logo">
+          <img src="Billeder/Logo.webp" alt="L.O.B logo" />
+        </a>
+
+        <div class="menu">
+          <a href="Omlob.html">Om L.O.B</a>
+          <details>
+            <summary>Aktiviteter ▾</summary>
+            <div class="dropdown-content">
+              <a href="fodbold.html">Fodbold</a>
+              <a href="fodbold.html">Badminton</a>
+              <a href="fodbold.html">Volley</a>
+              <a href="fodbold.html">Løb</a>
+              <a href="fodbold.html">Motion</a>
+            </div>
+          </details>
+          <a href="medlemskab.html">Medlemskab</a>
+          <a href="arrangementer.html">Arrangementer</a>
+          <a href="medlemskab.html" class="cta">Bliv medlem</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div
+        class="hero__bg"
+        style="--hero: url('Billeder/hero-om-lob.svg')"
+      ></div>
+      <div class="hero__inner">
+        <h1 class="hero__title">OM L.O.B</h1>
+        <p class="hero__lead">
+          L.O.B er for mænd fra 28-65 år, der bor i Lind og omegn og har lyst
+          til at være en del af et fællesskab – med eller uden bold. Her handler
+          det om grin, hygge og kammeratskab mere end om resultater og
+          konkurrence.
+        </p>
+      </div>
+    </section>
+
+    <main>
+      <!-- Om klubben (top-justeret) -->
+      <section class="section">
+        <div class="container">
+          <h2>Om klubben</h2>
+
+          <div class="split">
+            <!-- Kolonne 1 -->
+            <div class="split__text">
+              <p>
+                Som medlem af L.O.B bliver du en del af et fællesskab, hvor
+                sport og samvær går hånd i hånd.
+              </p>
+              <p>
+                Klubben har forskellige aktivitetsgrupper, hvor du kan spille
+                fodbold (både inde og ude) badminton, volleyball eller deltage i
+                motionsløb. Derudover kan du bruge fitnessfaciliteterne i ALPI
+                Hallerne til en fordelagtig pris. Udover de sportslige
+                aktiviteter arrangerer L.O.B løbende foredrag, rundvisninger,
+                fester og fælles ture – både i lokalområdet og længere væk, fx
+                når vi sammen tager til Parken for at se bold eller støtter FCM
+                på hjemmebane. Læs mere om arrangementerne her.
+              </p>
+            </div>
+
+            <!-- Kolonne 2 -->
+            <div class="split__text">
+              <p>
+                Der er desuden faste klubaftener og formiddage, hvor medlemmerne
+                mødes i LOBbyen til kaffe, en øl eller et spil pool og dart.
+              </p>
+              <p>
+                Fælles for det hele er, at det foregår i et afslappet miljø,
+                hvor der er plads til alle – uanset alder, niveau eller
+                ambitioner. Nogle kommer for at dyrke sport, andre for det
+                sociale – og mange for begge dele.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOBbyen (center-justeret ud fra billedet) -->
+      <section class="section">
+        <div class="container">
+          <div class="split split--center">
+            <figure class="split__media">
+              <img src="Billeder/bar.webp" alt="LOBbyen – klublokalet" />
+            </figure>
+            <article class="split__text">
+              <h2>LOBbyen – vores klublokale</h2>
+              <p>
+                L.O.B holder til i kælderen under Hal 2 i ALPI Hallerne, hvor du
+                finder vores klublokale LOBbyen.
+              </p>
+              <p>
+                Klublokalet er åbent hver onsdag fra kl. 19.30–21.30 samt lørdag
+                formiddag fra kl. 11.00–13.00
+              </p>
+              <p>
+                LOBbyen er super hyggelig indrettet og hvor der altid er kolde
+                drikkevarer i køleskabet, sport på skærmen og plads til både
+                gode snakke og et spil pool.
+              </p>
+              <p>
+                LOBbyen er indrettet med en stor bar, poolbord, dart,
+                bordfodbold samt borde og stole. Derudover har vi et stort
+                fladskærms TV, hvor vi ofte viser fodboldkampe.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Værdier og formål -->
+      <section class="section">
+        <div class="container" style="text-align: center">
+          <h2>L.O.B’s værdier og formål</h2>
+          <p style="max-width: 70ch; margin: 0 auto 5px">
+            I Lind Old Boys dyrker vi kammeratskabet – med eller uden bold.
+          </p>
+          <p style="max-width: 70ch; margin: 0 auto 25px">
+            Vi kalder os selv en “gentleman-klub”, ikke fordi vi går med slips,
+            men fordi vi møder hinanden med respekt, humor og godt humør.
+          </p>
+
+          <div class="values">
+            <div class="value">
+              <i class="fa-solid fa-users"></i>
+              <p>Skabe et stærkt lokalt fællesskab for mænd 28+</p>
+            </div>
+
+            <div class="value">
+              <i class="fa-solid fa-futbol"></i>
+              <p>Give plads til både sport, hygge og sociale aktiviteter</p>
+            </div>
+
+            <div class="value">
+              <i class="fa-solid fa-people-group"></i>
+              <p>Samle folk på tværs af generationer</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Historien (midt-justeret ift. billede) -->
+      <section class="section">
+        <div class="container">
+          <div class="split split--center">
+            <article class="split__text">
+              <h2>Historien</h2>
+              <p>
+                Lind Old Boys blev dannet i 1969 af en håndfuld entusiaster, der
+                ville skabe et lokalt fællesskab for voksne. Siden da er klubben
+                vokset støt, og i dag har vi over 100 medlemmer.
+              </p>
+              <p>
+                Selvom klubben har udviklet sig, er ånden den samme: sport, grin
+                og fællesskab – uden unødvendige formaliteter.
+              </p>
+            </article>
+            <figure class="split__media">
+              <img
+                src="Billeder/beer.webp"
+                alt="Et tilbageblik – L.O.B-hygge"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bestyrelsen (OPDATERET til kontakt-kort) -->
+      <section class="section">
+        <div class="container">
+          <h2>Bestyrelsen</h2>
+          <p style="max-width: 75ch; margin: 0 0 12px">
+            L.O.B’s bestyrelse varetager klubbens daglige drift og
+            arrangementer. Kontakt os gerne.
+          </p>
+
+          <div class="contact">
+            <div class="contact__card">
+              <p><strong>Formand – Morten Petersen</strong></p>
+              <p>Tlf.: 12 34 56 78</p>
+              <p>Mail: morten@lob.dk</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Næstformand – Mads Henriksen</strong></p>
+              <p>Tlf.: 22 33 44 55</p>
+              <p>Mail: mads@lob.dk</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Kasserer – Anne Grethe</strong></p>
+              <p>Tlf.: 31 31 31 31</p>
+              <p>Mail: anne@lob.dk</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Bestyrelsesmedlem – Jane Boesen</strong></p>
+              <p>Tlf.: 40 40 40 40</p>
+              <p>Mail: jane@lob.dk</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Bestyrelsesmedlem – Kim Andersen</strong></p>
+              <p>Tlf.: 50 50 50 50</p>
+              <p>Mail: kim@lob.dk</p>
+            </div>
+            <div class="contact__card">
+              <p><strong>Suppleant – Peter Holm</strong></p>
+              <p>Tlf.: 60 60 60 60</p>
+              <p>Mail: peter@lob.dk</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Generalforsamling (midt-justeret ift. billede) -->
+      <section class="section">
+        <div class="container">
+          <div class="split split--reverse split--center">
+            <figure class="split__media">
+              <img
+                src="Billeder/General.webp"
+                alt="Generalforsamling i L.O.B"
+              />
+            </figure>
+            <article class="split__text">
+              <h2>Generalforsamling</h2>
+              <p>
+                En gang om året mødes vi til generalforsamling i LOBbyen. Her
+                vender vi året, uddeler hæder og lægger planerne for næste
+                sæson.
+              </p>
+              <p>
+                Alle medlemmer er meget velkomne – både til mødet og den
+                efterfølgende hygge.
+              </p>
+              <a href="arrangementer.html" class="btn"
+                >Se kommende arrangementer</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-container">
+        <section>
+          <h2>Kontakt</h2>
+          <p>Lind Old Boys</p>
+          <p>Email: <a href="mailto:info@lob.dk">info@lob.dk</a></p>
+          <p>Telefon: <a href="tel:+4512345678">+45 12 34 56 78</a></p>
+        </section>
+
+        <section>
+          <h2>Privatlivspolitik</h2>
+          <ul>
+            <li><a href="/privatlivspolitik">Privatlivspolitik</a></li>
+            <li><a href="/cookie-politik">Cookie Politik</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Links</h2>
+          <ul>
+            <li><a href="omlob.html">Om L.O.B</a></li>
+            <li><a href="kontakt.html">Kontakt Os</a></li>
+            <li><a href="medlemskab.html">Bliv Medlem</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Andet</h2>
+          <ul>
+            <li><a href="vedtaegter.html">Vedtægter</a></li>
+            <li><a href="arrangementer.html">Generalforsamling</a></li>
+          </ul>
+          <div class="social">
+            <a href="https://www.facebook.com/lindoldboys" target="_blank"
+              ><span>f</span></a
+            >
+          </div>
+        </section>
+      </div>
+
+      <div class="divider"></div>
+      <div class="bottom">
+        © 2025 L.O.B Sportsklub. Alle rettigheder forbeholdes.
+      </div>
+    </footer>
+  </body>
+</html>
